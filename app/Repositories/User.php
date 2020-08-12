@@ -85,7 +85,7 @@ class User extends RepositoryAbstract
      * @param  $roles mixed string | array
      * @return list users
      */
-    public function onlyRoles($roles)
+    public function withoutRoles($roles)
     {
         if (gettype($roles) == 'string') {
             $roles = [$roles];
@@ -93,12 +93,12 @@ class User extends RepositoryAbstract
 
         return (new $this->model())
             ->whereHas('roles', function($sub_query) use ($roles) {
-                $sub_query->whereIn('name',  $roles);
+                $sub_query->whereNotIn('name',  $roles);
             })->get();
     }
 
     public function totalForDashboard()
     {
-        return $this->dataInfo('Employeeres', 'fa-user', 'bg-green',  $this->onlyRoles('employee')->count());
+        return $this->dataInfo('Employeeres', 'fa-user', 'bg-green',  $this->withoutRoles('owner')->count());
     }
 }
