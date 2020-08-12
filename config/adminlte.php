@@ -245,7 +245,7 @@ return [
         [
             'text'        => 'dashboard',
             'url'         => 'dashboard',
-            'icon'        => 'far fa-fw fa-tachometer-alt',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
             'label'       => 'new',
             'label_color' => 'success',
         ],
