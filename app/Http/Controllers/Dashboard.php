@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Item;
+use App\Repositories\Customer;
+use App\Repositories\User;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -14,6 +17,12 @@ class Dashboard extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('app.dashboard');
+        $items = (new Item())->totalForDashboard();
+        $customers = (new Customer())->totalForDashboard();
+        $employeeres =  (new User())->totalForDashboard();
+
+        return view('app.dashboard', [
+            'cards' => compact('items', 'customers', 'employeeres')
+        ]);
     }
 }

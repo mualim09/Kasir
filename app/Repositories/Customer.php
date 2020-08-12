@@ -2,14 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Abstracts\Repository as RepositoryAbstract;
-use App\Builder\NumberGeneratorBuilder;
-use App\Models\CustomerPoint;
+use App\Models\Customer as CustomerModel;
 use Illuminate\Http\Request;
+use App\Traits\HasDashboard;
+use App\Models\CustomerPoint;
 use Illuminate\Support\Facades\DB;
+use App\Builder\NumberGeneratorBuilder;
+use App\Abstracts\Repository as RepositoryAbstract;
 
 class Customer extends RepositoryAbstract
 {
+    use HasDashboard;
+
     protected string $model = 'App\Models\Customer';
 
     public function datatable(Request $request)
@@ -56,5 +60,10 @@ class Customer extends RepositoryAbstract
         $customer->save();
 
         return $customer;
+    }
+
+    public function totalForDashboard()
+    {
+        return $this->dataInfo('Customers', 'fa-users', 'bg-blue');
     }
 }

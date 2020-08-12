@@ -13,6 +13,9 @@ Vue.component('v-button', require('./components/Button/Button').default)
 Vue.component('v-dropdown', require('./components/Form/Dropdown').default)
 Vue.component('select2', require('./components/Form/Select2').default)
 
+/* Dashboard Components */
+Vue.component('v-info', require('./components/Dashboard/Info').default)
+
 const app = new Vue({
   el: '#app',
 });

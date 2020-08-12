@@ -8,6 +8,7 @@ use App\Models\Item as ItemModel;
 use App\Models\Price;
 use App\Models\Stock;
 use App\Models\Unit;
+use App\Traits\HasDashboard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ use Yajra\DataTables\DataTables;
 
 class Item extends RepositoryAbstract
 {
+    use HasDashboard;
+
     protected string $model = 'App\Models\Item';
 
     public function datatable(Request $request)
@@ -84,5 +87,10 @@ class Item extends RepositoryAbstract
 
             return $item;
         });
+    }
+
+    public function totalForDashboard()
+    {
+        return $this->dataInfo('Items', 'fa-box-open', 'bg-yellow');
     }
 }
