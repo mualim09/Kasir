@@ -14,11 +14,7 @@ class UpdateCustomerTypeIdColumnToNullableInCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropForeign(['customer_type_id']);
-            $table->dropColumn('customer_type_id');
-        });
-        Schema::table('customers', function (Blueprint $table) {
-            $table->foreignId('customer_type_id')->nullable();
+            $table->foreignId('customer_type_id')->nullable()->change();
         });
     }
 
@@ -31,9 +27,6 @@ class UpdateCustomerTypeIdColumnToNullableInCustomersTable extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('customer_type_id');
-        });
-        Schema::table('customers', function (Blueprint $table) {
-            $table->foreignId('customer_type_id')->references('id')->on('customer_types')->after('id')->nullable();
         });
     }
 }
